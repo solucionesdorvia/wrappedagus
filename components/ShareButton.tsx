@@ -9,9 +9,12 @@ export function ShareButton({ text, className = "" }: Props) {
 
   const onClick = async () => {
     // share API si está disponible (mobile), si no copiar al clipboard
-    if (typeof navigator !== "undefined" && (navigator as any).share) {
+    const nav = typeof navigator !== "undefined"
+      ? (navigator as Navigator & { share?: (data: { text: string; title?: string }) => Promise<void> })
+      : null;
+    if (nav?.share) {
       try {
-        await (navigator as any).share({ text, title: "Medical Wrapped 2026" });
+        await nav.share({ text, title: "Medical Wrapped 2026" });
         return;
       } catch {
         // cancelado, seguimos al copy fallback

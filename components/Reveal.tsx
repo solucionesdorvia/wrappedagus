@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties } from "react";
+import { ReactNode, CSSProperties, ElementType } from "react";
 
 type RevealType = "up" | "in" | "scale" | "tilt";
 
@@ -10,7 +10,7 @@ const classMap: Record<RevealType, string> = {
 };
 
 type Props = {
-  children: ReactNode;
+  children?: ReactNode;
   as?: "div" | "p" | "h1" | "h2" | "h3" | "span" | "li" | "ol" | "a" | "section";
   type?: RevealType;
   delay?: number; // en ms
@@ -28,7 +28,7 @@ export function Reveal({
   style,
   href,
 }: Props) {
-  const Tag = as as any;
+  const Tag = as as ElementType;
   return (
     <Tag
       href={href}
