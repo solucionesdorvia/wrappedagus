@@ -109,8 +109,8 @@ export const slide12 = {
   label: "Tu rol en el curso",
   badge: "La cabra cebadora de mates",
   emoji: "🧉",
-  // foto del mate como sticker decorativo (opcional). Dejá "" para esconderlo.
-  matePhoto: "/images/mate.jpg",
+  // foto protagonista: él calentando el agua del mate en una guardia
+  matePhoto: "/images/cebando-mate.jpg",
 };
 
 export const slide13 = {

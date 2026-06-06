@@ -1,5 +1,6 @@
 import { ProgressIndicator } from "@/components/ProgressIndicator";
 import { KeyboardNav } from "@/components/KeyboardNav";
+import { TapNav } from "@/components/TapNav";
 import { AudioButton } from "@/components/AudioButton";
 import { meta, slide17 } from "@/lib/data";
 
@@ -35,6 +36,7 @@ export default function Home() {
     <>
       <ProgressIndicator count={TOTAL_SLIDES} />
       <KeyboardNav />
+      <TapNav />
       <AudioButton src={meta.song.src} />
 
       <main>
