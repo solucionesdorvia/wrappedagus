@@ -45,10 +45,7 @@ export function Slide01Intro() {
       </Reveal>
 
       <Reveal as="div" delay={650} className="mt-10 inline-block">
-        <StartButton
-          href="#slide-02"
-          className="inline-block rounded-full bg-white text-black px-7 py-3 font-bold hover:scale-105 active:scale-95 transition"
-        >
+        <StartButton className="inline-block rounded-full bg-white text-black px-7 py-3 font-bold hover:scale-105 active:scale-95 transition">
           {slide01.cta} →
         </StartButton>
       </Reveal>

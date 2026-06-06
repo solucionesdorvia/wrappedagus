@@ -6,23 +6,17 @@ html,
 body {
   background: #000;
   color: #fff;
+  /* el deck ocupa la pantalla entera, nada de scroll en html/body */
+  overflow: hidden;
+  height: 100%;
   /* sin delay de 300ms en mobile, sin zoom por doble tap */
   touch-action: manipulation;
   /* no resaltar selección al tap (queremos taps de UI, no de texto) */
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
   user-select: none;
-}
-
-/* scroll-snap vertical estilo stories. html es el contenedor scrolleable.
-   scroll-behavior se controla desde JS (lib/scroll.ts) para tener animaciones
-   más rápidas y consistentes. */
-html {
-  scroll-snap-type: y proximity;
-}
-
-main > section {
-  scroll-snap-align: start;
+  /* sin overscroll bounce (iOS) que rompa el transform */
+  overscroll-behavior: none;
 }
 
 ::-webkit-scrollbar {

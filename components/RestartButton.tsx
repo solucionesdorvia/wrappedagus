@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { smoothScrollToY } from "@/lib/scroll";
+import { useDeck } from "./Deck";
 
 type Props = {
   children: ReactNode;
@@ -9,18 +9,14 @@ type Props = {
 };
 
 /**
- * Botón "Volver a ver" del cierre. Anima el scroll de vuelta al inicio
- * usando nuestra animación custom (más snappy que el hash-nav nativo).
+ * Botón "Volver a ver" del cierre. Vuelve al slide 1 vía deck context.
  */
 export function RestartButton({ children, className = "" }: Props) {
-  const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    smoothScrollToY(0, 500);
-  };
+  const { go } = useDeck();
 
   return (
-    <a href="#slide-01" onClick={onClick} className={className}>
+    <button type="button" onClick={() => go(0)} className={className}>
       {children}
-    </a>
+    </button>
   );
 }

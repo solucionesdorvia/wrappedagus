@@ -1,10 +1,5 @@
-import { ProgressIndicator } from "@/components/ProgressIndicator";
-import { KeyboardNav } from "@/components/KeyboardNav";
-import { TapNav } from "@/components/TapNav";
-import { TapHint } from "@/components/TapHint";
-import { AudioButton } from "@/components/AudioButton";
-import { ScrollResetOnLoad } from "@/components/ScrollResetOnLoad";
-import { meta, slide17 } from "@/lib/data";
+import { Deck } from "@/components/Deck";
+import { slide17 } from "@/lib/data";
 
 import { Slide01Intro } from "@/components/slides/Slide01Intro";
 import { Slide02Welcome } from "@/components/slides/Slide02Welcome";
@@ -29,46 +24,33 @@ import { Slide18Amor } from "@/components/slides/Slide18Amor";
 import { SlideUltimasDiez } from "@/components/slides/SlideUltimasDiez";
 import { Slide20Cierre } from "@/components/slides/Slide20Cierre";
 
-// total = 20 originales − 1 (galería slide 19 reemplazada) + 1 (primer día)
-// + 5 (un slide por grupo) + 1 (últimas 10) = 26
-const TOTAL_SLIDES = 26;
-
 export default function Home() {
   return (
-    <>
-      <ScrollResetOnLoad />
-      <ProgressIndicator count={TOTAL_SLIDES} />
-      <KeyboardNav />
-      <TapNav />
-      <TapHint />
-      <AudioButton src={meta.song.src} />
-
-      <main>
-        <Slide01Intro />
-        <Slide02Welcome />
-        <SlidePrimerDia />
-        <Slide03Patologia />
-        <Slide04MasEstudiada />
-        <Slide05MenosEstudiada />
-        <Slide06ExamenSufrido />
-        <Slide07Lapicera />
-        <Slide08SantojanniIntro />
-        <Slide09Minutos />
-        <Slide10MartesGuardia />
-        <Slide11Viernes />
-        <Slide12Cabra />
-        <Slide13Robo />
-        <Slide14BadgesIntro />
-        <Slide15Badges />
-        <Slide16Song />
-        <Slide17Grupos />
-        {slide17.groups.map((g, i) => (
-          <SlideGrupo key={g.slug} group={g} rank={i + 1} />
-        ))}
-        <Slide18Amor />
-        <SlideUltimasDiez />
-        <Slide20Cierre />
-      </main>
-    </>
+    <Deck>
+      <Slide01Intro />
+      <Slide02Welcome />
+      <SlidePrimerDia />
+      <Slide03Patologia />
+      <Slide04MasEstudiada />
+      <Slide05MenosEstudiada />
+      <Slide06ExamenSufrido />
+      <Slide07Lapicera />
+      <Slide08SantojanniIntro />
+      <Slide09Minutos />
+      <Slide10MartesGuardia />
+      <Slide11Viernes />
+      <Slide12Cabra />
+      <Slide13Robo />
+      <Slide14BadgesIntro />
+      <Slide15Badges />
+      <Slide16Song />
+      <Slide17Grupos />
+      {slide17.groups.map((g, i) => (
+        <SlideGrupo key={g.slug} group={g} rank={i + 1} />
+      ))}
+      <Slide18Amor />
+      <SlideUltimasDiez />
+      <Slide20Cierre />
+    </Deck>
   );
 }
