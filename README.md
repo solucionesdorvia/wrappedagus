@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Medical Wrapped 2026 🩺
 
-## Getting Started
+Web interactiva tipo Spotify Wrapped — sorpresa para festejar los 8 años de carrera de un médico recién recibido.
 
-First, run the development server:
+20 slides con scroll-snap vertical, animaciones con Framer Motion, paletas dramáticas estilo Wrapped real.
+
+## Cómo correrlo
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrí [http://localhost:3000](http://localhost:3000). Mejor experiencia en mobile (vertical), pero está responsive a desktop.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Cómo editar el contenido
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Todo el texto y los stats viven en un solo archivo:** [`lib/data.ts`](./lib/data.ts).
 
-## Learn More
+Está organizado por slide (`slide01`, `slide02`, …, `slide20`). Editá los valores, guardá, y la página se actualiza sola.
 
-To learn more about Next.js, take a look at the following resources:
+### Agregar fotos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Poné las imágenes en `public/images/` (creá la carpeta si no existe).
+2. En `lib/data.ts`:
+   - **Slide 18 (el amor):** seteá `slide18.photo = "/images/amor.jpg"`.
+   - **Slide 19 (galería):** llená el array `slide19.photos = ["/images/foto1.jpg", "/images/foto2.jpg", ...]`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Mientras estén vacíos, se muestran placeholders.
 
-## Deploy on Vercel
+### Agregar la canción "30 Denarios"
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Poné el archivo `.mp3` en `public/audio/30-denarios.mp3`.
+2. En `lib/data.ts`, seteá `meta.song.src = "/audio/30-denarios.mp3"`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Aparece un botón flotante de play/pausa abajo a la derecha. El autoplay está bloqueado por los browsers, así que el botón es necesario.
+
+## Navegación
+
+- **Scroll vertical** (snap entre slides).
+- **Flechas ↑ / ↓** del teclado para ir slide por slide.
+- Barra de progreso arriba (estilo stories).
+- En el último slide hay botón **Volver a ver** y **Compartir** (usa Web Share API en mobile, copia al portapapeles en desktop).
+
+## Stack
+
+- Next.js 14 (App Router) + TypeScript
+- Tailwind CSS
+- Framer Motion
+- canvas-confetti
+- Fuentes: Bricolage Grotesque (display) + Instrument Serif (slides emotivos) via `next/font/google`
+
+## Deploy a Vercel
+
+```bash
+npx vercel
+```
+
+O conectá el repo desde [vercel.com](https://vercel.com). No requiere variables de entorno.
+
+## Estructura
+
+```
+app/
+  layout.tsx       — fonts, metadata
+  page.tsx         — orquesta los 20 slides
+  globals.css      — scroll-snap, utilidades
+components/
+  Slide.tsx        — wrapper común (paleta, layout, stagger)
+  BigNumber.tsx    — contador animado de 0 al valor final
+  ProgressIndicator.tsx
+  AudioButton.tsx
+  ShareButton.tsx
+  ConfettiBurst.tsx
+  KeyboardNav.tsx
+  slides/          — un archivo por slide (Slide01Intro.tsx … Slide20Cierre.tsx)
+lib/
+  data.ts          — TODO el contenido
+  motion.ts        — variantes de animación reutilizables
+```
+
+Felicitaciones, doctor. 💗
