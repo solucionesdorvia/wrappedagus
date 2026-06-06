@@ -1,5 +1,6 @@
 import { Slide } from "@/components/Slide";
 import { Reveal } from "@/components/Reveal";
+import { StartButton } from "@/components/StartButton";
 import { slide01 } from "@/lib/data";
 
 export function Slide01Intro() {
@@ -43,13 +44,13 @@ export function Slide01Intro() {
         Medical Wrapped {slide01.year}
       </Reveal>
 
-      <Reveal
-        as="a"
-        href="#slide-02"
-        delay={650}
-        className="mt-10 inline-block rounded-full bg-white text-black px-7 py-3 font-bold hover:scale-105 active:scale-95 transition"
-      >
-        {slide01.cta} →
+      <Reveal as="div" delay={650} className="mt-10 inline-block">
+        <StartButton
+          href="#slide-02"
+          className="inline-block rounded-full bg-white text-black px-7 py-3 font-bold hover:scale-105 active:scale-95 transition"
+        >
+          {slide01.cta} →
+        </StartButton>
       </Reveal>
     </Slide>
   );

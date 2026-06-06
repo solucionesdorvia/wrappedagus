@@ -1,6 +1,6 @@
 import { Slide } from "@/components/Slide";
 import { Reveal } from "@/components/Reveal";
-import { slide16 } from "@/lib/data";
+import { meta, slide16 } from "@/lib/data";
 
 export function Slide16Song() {
   return (
@@ -30,9 +30,14 @@ export function Slide16Song() {
         className="mt-8 rounded-2xl bg-black/40 backdrop-blur p-5 sm:p-6 max-w-md"
       >
         <div className="flex items-center gap-4">
-          <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-lg bg-gradient-to-br from-amber-300 to-rose-500 grid place-items-center shadow-lg shrink-0">
-            <span className="text-3xl">🎶</span>
-          </div>
+          {/* portada real del Tango 4 */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={meta.song.cover}
+            alt="Tango 4 — Charly García & Pedro Aznar"
+            loading="lazy"
+            className="h-20 w-20 sm:h-24 sm:w-24 rounded-lg object-cover shadow-lg shrink-0"
+          />
           <div className="min-w-0">
             <div className="text-xs uppercase tracking-widest text-white/60 font-bold">
               Now playing

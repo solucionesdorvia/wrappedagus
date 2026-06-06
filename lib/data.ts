@@ -9,9 +9,10 @@ export const meta = {
   song: {
     title: "30 Denarios",
     artist: "Charly García & Pedro Aznar",
-    // dejá vacío si no tenés el archivo aún
-    // poné el .mp3 en public/audio/ y referencialo acá: "/audio/30-denarios.mp3"
-    src: "",
+    // archivo de audio en public/audio/
+    src: "/audio/30-denarios.mp3",
+    // portada del disco
+    cover: "/images/album-cover.jpg",
   },
 };
 
