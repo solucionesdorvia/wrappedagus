@@ -2,6 +2,7 @@ import { ProgressIndicator } from "@/components/ProgressIndicator";
 import { KeyboardNav } from "@/components/KeyboardNav";
 import { TapNav } from "@/components/TapNav";
 import { AudioButton } from "@/components/AudioButton";
+import { ScrollResetOnLoad } from "@/components/ScrollResetOnLoad";
 import { meta, slide17 } from "@/lib/data";
 
 import { Slide01Intro } from "@/components/slides/Slide01Intro";
@@ -34,6 +35,7 @@ const TOTAL_SLIDES = 26;
 export default function Home() {
   return (
     <>
+      <ScrollResetOnLoad />
       <ProgressIndicator count={TOTAL_SLIDES} />
       <KeyboardNav />
       <TapNav />
