@@ -1,6 +1,7 @@
 import { ProgressIndicator } from "@/components/ProgressIndicator";
 import { KeyboardNav } from "@/components/KeyboardNav";
 import { TapNav } from "@/components/TapNav";
+import { TapHint } from "@/components/TapHint";
 import { AudioButton } from "@/components/AudioButton";
 import { ScrollResetOnLoad } from "@/components/ScrollResetOnLoad";
 import { meta, slide17 } from "@/lib/data";
@@ -39,6 +40,7 @@ export default function Home() {
       <ProgressIndicator count={TOTAL_SLIDES} />
       <KeyboardNav />
       <TapNav />
+      <TapHint />
       <AudioButton src={meta.song.src} />
 
       <main>

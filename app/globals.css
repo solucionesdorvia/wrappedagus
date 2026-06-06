@@ -6,12 +6,19 @@ html,
 body {
   background: #000;
   color: #fff;
+  /* sin delay de 300ms en mobile, sin zoom por doble tap */
+  touch-action: manipulation;
+  /* no resaltar selección al tap (queremos taps de UI, no de texto) */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-/* scroll-snap vertical estilo stories. html es el contenedor scrolleable. */
+/* scroll-snap vertical estilo stories. html es el contenedor scrolleable.
+   scroll-behavior se controla desde JS (lib/scroll.ts) para tener animaciones
+   más rápidas y consistentes. */
 html {
   scroll-snap-type: y proximity;
-  scroll-behavior: smooth;
 }
 
 main > section {
@@ -81,6 +88,19 @@ main > section {
   to {
     opacity: 1;
     transform: translateY(0) rotate(-3deg);
+  }
+}
+
+/* sutil pulso para el hint de "tap para avanzar" */
+@keyframes wrap-pulse-x {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(6px);
+    opacity: 1;
   }
 }
 

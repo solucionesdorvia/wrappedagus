@@ -1,29 +1,34 @@
 "use client";
 
 import { useEffect } from "react";
+import {
+  getCurrentSlideIndex,
+  getSections,
+  smoothScrollToSection,
+} from "@/lib/scroll";
 
 export function KeyboardNav() {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
-      const sections = Array.from(
-        document.querySelectorAll<HTMLElement>("main > section")
-      );
-      if (sections.length === 0) return;
-      const y = window.scrollY + window.innerHeight / 2;
-      const currentIdx = sections.findIndex((s) => {
-        const top = s.offsetTop;
-        const bottom = top + s.offsetHeight;
-        return y >= top && y < bottom;
-      });
-      const idx = currentIdx === -1 ? 0 : currentIdx;
-      const next =
-        e.key === "ArrowDown"
-          ? Math.min(sections.length - 1, idx + 1)
-          : Math.max(0, idx - 1);
-      if (next !== idx) {
+      const isNext =
+        e.key === "ArrowDown" ||
+        e.key === "ArrowRight" ||
+        e.key === " " ||
+        e.key === "Enter";
+      const isPrev = e.key === "ArrowUp" || e.key === "ArrowLeft";
+      if (!isNext && !isPrev) return;
+
+      const sections = getSections();
+      const currentIdx = getCurrentSlideIndex();
+      if (currentIdx === -1) return;
+
+      const targetIdx = isNext
+        ? Math.min(sections.length - 1, currentIdx + 1)
+        : Math.max(0, currentIdx - 1);
+
+      if (targetIdx !== currentIdx) {
         e.preventDefault();
-        sections[next].scrollIntoView({ behavior: "smooth", block: "start" });
+        smoothScrollToSection(sections[targetIdx]);
       }
     };
     window.addEventListener("keydown", handler);

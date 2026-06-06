@@ -1,57 +1,93 @@
 "use client";
 
 import { useEffect } from "react";
+import {
+  getCurrentSlideIndex,
+  getSections,
+  smoothScrollToSection,
+} from "@/lib/scroll";
 
 /**
  * Navegación estilo Spotify Wrapped:
- *   - Tap en la mitad derecha de la pantalla → siguiente slide
- *   - Tap en la mitad izquierda de la pantalla → slide anterior
+ *   - Tap en la mitad derecha → siguiente slide
+ *   - Tap en la mitad izquierda → slide anterior
+ *   - Swipe vertical hacia arriba (>50px en <400ms) → siguiente slide
+ *   - Swipe vertical hacia abajo (>50px en <400ms) → slide anterior
  *
- * Ignora taps sobre elementos interactivos (botones, links, audio button,
- * inputs) para no romper la UX. El scroll natural con el dedo sigue
- * funcionando en paralelo.
+ * Ignora taps sobre elementos interactivos. El scroll natural con el dedo
+ * sigue funcionando si el gesto no califica como swipe rápido.
  */
 export function TapNav() {
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-
-      // No interferir con elementos interactivos (botón "Empezá", Volver a ver,
-      // Compartir, el botón flotante de audio, etc.)
-      if (target.closest("a, button, input, textarea, select, [data-no-tap-nav]")) {
-        return;
-      }
-
-      const sections = Array.from(
-        document.querySelectorAll<HTMLElement>("main > section")
+    const isInteractive = (target: EventTarget | null) => {
+      if (!(target instanceof HTMLElement)) return false;
+      return !!target.closest(
+        "a, button, input, textarea, select, [data-no-tap-nav]"
       );
-      if (sections.length === 0) return;
+    };
 
-      // Slide actualmente visible (el que cruza el medio del viewport)
-      const viewportMid = window.innerHeight / 2;
-      const currentIdx = sections.findIndex((s) => {
-        const r = s.getBoundingClientRect();
-        return r.top <= viewportMid && r.bottom > viewportMid;
-      });
+    const goRelative = (delta: number) => {
+      const sections = getSections();
+      const currentIdx = getCurrentSlideIndex();
       if (currentIdx === -1) return;
-
-      // Mitad derecha → siguiente, mitad izquierda → anterior
-      const isRight = e.clientX > window.innerWidth / 2;
-      const targetIdx = isRight
-        ? Math.min(sections.length - 1, currentIdx + 1)
-        : Math.max(0, currentIdx - 1);
-
+      const targetIdx = Math.max(
+        0,
+        Math.min(sections.length - 1, currentIdx + delta)
+      );
       if (targetIdx !== currentIdx) {
-        sections[targetIdx].scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+        smoothScrollToSection(sections[targetIdx]);
       }
     };
 
-    window.addEventListener("click", handler);
-    return () => window.removeEventListener("click", handler);
+    // CLICKS (mouse desktop + tap mobile)
+    const onClick = (e: MouseEvent) => {
+      if (isInteractive(e.target)) return;
+      const isRight = e.clientX > window.innerWidth / 2;
+      goRelative(isRight ? 1 : -1);
+    };
+
+    // SWIPES verticales en mobile
+    let touchStartY = 0;
+    let touchStartX = 0;
+    let touchStartTime = 0;
+    let touchWasOnInteractive = false;
+
+    const onTouchStart = (e: TouchEvent) => {
+      const t = e.touches[0];
+      touchStartY = t.clientY;
+      touchStartX = t.clientX;
+      touchStartTime = performance.now();
+      touchWasOnInteractive = isInteractive(e.target);
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (touchWasOnInteractive) return;
+      const t = e.changedTouches[0];
+      const deltaY = t.clientY - touchStartY;
+      const deltaX = t.clientX - touchStartX;
+      const duration = performance.now() - touchStartTime;
+
+      // Solo cuenta como swipe si fue rápido y predominantemente vertical
+      const isQuick = duration < 400;
+      const isVertical = Math.abs(deltaY) > Math.abs(deltaX);
+      const isLongEnough = Math.abs(deltaY) > 50;
+
+      if (isQuick && isVertical && isLongEnough) {
+        e.preventDefault();
+        // swipe arriba (deltaY negativo) → siguiente
+        goRelative(deltaY < 0 ? 1 : -1);
+      }
+    };
+
+    window.addEventListener("click", onClick);
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: false });
+
+    return () => {
+      window.removeEventListener("click", onClick);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
   }, []);
 
   return null;
