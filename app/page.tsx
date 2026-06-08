@@ -21,7 +21,6 @@ import { Slide16Song } from "@/components/slides/Slide16Song";
 import { Slide17Grupos } from "@/components/slides/Slide17Grupos";
 import { SlideGrupo } from "@/components/slides/SlideGrupo";
 import { Slide18Amor } from "@/components/slides/Slide18Amor";
-import { SlideUltimasDiez } from "@/components/slides/SlideUltimasDiez";
 import { Slide20Cierre } from "@/components/slides/Slide20Cierre";
 
 export default function Home() {
@@ -49,7 +48,6 @@ export default function Home() {
         <SlideGrupo key={g.slug} group={g} rank={i + 1} />
       ))}
       <Slide18Amor />
-      <SlideUltimasDiez />
       <Slide20Cierre />
     </Deck>
   );

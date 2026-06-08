@@ -217,14 +217,6 @@ export const slidePrimerDia = {
   photo: "/images/inscripcion.jpg",
 };
 
-// NUEVA — "Las últimas 10"
-export const slideUltimasDiez = {
-  kicker: "Y AHORA",
-  title: "Últimas 10",
-  subtitle: "Vamossss 💪",
-  fact: "guardias para cerrar la carrera.",
-  photo: "/images/santojanni-final.jpg",
-};
 
 export const slide18 = {
   label: "Y también",
