@@ -203,7 +203,7 @@ export const slide17 = {
       caption: "Tardes de estudio por videollamada",
       bg: "bg-gradient-to-br from-amber-400 via-amber-500 to-orange-400",
       accent: "text-stone-900",
-      fact: "De acá salió Rodri. Y eso, en 8 años, ya vale oro.",
+      fact: "",
     },
   ],
 };

@@ -66,13 +66,15 @@ export function SlideGrupo({ group, rank }: Props) {
           {group.name}
         </Reveal>
 
-        <Reveal
-          as="p"
-          delay={600}
-          className="mt-3 font-serif italic text-lg sm:text-2xl opacity-85 max-w-md text-balance"
-        >
-          {group.fact}
-        </Reveal>
+        {group.fact && (
+          <Reveal
+            as="p"
+            delay={600}
+            className="mt-3 font-serif italic text-lg sm:text-2xl opacity-85 max-w-md text-balance"
+          >
+            {group.fact}
+          </Reveal>
+        )}
       </div>
     </Slide>
   );
