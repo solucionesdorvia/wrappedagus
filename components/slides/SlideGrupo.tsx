@@ -5,6 +5,8 @@ type Group = {
   slug: string;
   name: string;
   photo: string;
+  /** Pie de foto opcional, estilo polaroid (chico, italic). */
+  caption?: string;
   bg: string;
   accent: string;
   fact: string;
@@ -46,10 +48,20 @@ export function SlideGrupo({ group, rank }: Props) {
           />
         </Reveal>
 
+        {group.caption && (
+          <Reveal
+            as="p"
+            delay={350}
+            className="mt-3 font-serif italic text-sm sm:text-base opacity-75 max-w-xs text-balance"
+          >
+            {group.caption}
+          </Reveal>
+        )}
+
         <Reveal
           as="h2"
           delay={450}
-          className="mt-6 font-display font-black text-4xl sm:text-6xl leading-[0.95] text-balance"
+          className="mt-4 font-display font-black text-4xl sm:text-6xl leading-[0.95] text-balance"
         >
           {group.name}
         </Reveal>
