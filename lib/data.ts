@@ -16,6 +16,23 @@ export const meta = {
   },
 };
 
+// =============================================================
+// PÁGINA QR (/qr) — para imprimir o mostrar en el festejo
+// Reemplazá `url` con la URL pública de Railway cuando la tengas.
+// =============================================================
+export const qrPage = {
+  // ⚠️ poné acá la URL pública del wrapped (la que da Railway)
+  url: "https://wrappedagus.up.railway.app",
+  kicker: "MEDICAL WRAPPED 2026",
+  title: "8 años.",
+  titleAlt: "Una sola meta.",
+  cta: "Escaneá",
+  subtitle: "Para Agus, el doctor.",
+  description:
+    "25 slides con todo lo que te llevás de la carrera. Con música y todo.",
+  footer: "De parte de toda la familia ♥",
+};
+
 export const slide01 = {
   kicker: "MEDICAL WRAPPED",
   year: "2026",
