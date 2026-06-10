@@ -5,7 +5,7 @@
 
 export const meta = {
   year: 2026,
-  honoree: "doctor",
+  honoree: "médico",
   song: {
     title: "30 Denarios",
     artist: "Charly García & Pedro Aznar",
@@ -27,7 +27,7 @@ export const qrPage = {
   title: "8 años.",
   titleAlt: "Una sola meta.",
   cta: "Escaneá",
-  subtitle: "Para Agus, el doctor.",
+  subtitle: "Para Agus, el médico.",
   description:
     "25 slides con todo lo que te llevás de la carrera. Con música y todo.",
   footer: "De parte de toda la familia ♥",
@@ -264,7 +264,7 @@ export const slide20 = {
   line2: "Miles de hojas.",
   line3: "Un montón de mates.",
   line4: "Una sola meta.",
-  closing: "Felicitaciones, doctor.",
+  closing: "Felicitaciones, médico.",
   shareText:
-    "Felicitaciones doctor 🩺 — 8 años, una sola meta. #MedicalWrapped2026",
+    "Felicitaciones médico 🩺 — 8 años, una sola meta. #MedicalWrapped2026",
 };
