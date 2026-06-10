@@ -24,12 +24,14 @@ export const qrPage = {
   // URL pública del wrapped (Railway)
   url: "https://wrappedagus-production.up.railway.app",
   kicker: "MEDICAL WRAPPED 2026",
-  title: "8 años.",
-  titleAlt: "Una sola meta.",
+  title: "Lo sabías",
+  titleAlt: "desde chico.",
+  photo: "/images/agus-nino-medico.jpg",
+  photoCaption: "circa 2002",
   cta: "Escaneá",
+  scanLabel: "el wrapped completo",
   subtitle: "Para Agus, el médico.",
-  description:
-    "25 slides con todo lo que te llevás de la carrera. Con música y todo.",
+  description: "8 años. Una sola meta. Con música y todo.",
   footer: "De parte de toda la familia ♥",
 };
 
