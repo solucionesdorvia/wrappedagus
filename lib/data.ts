@@ -21,8 +21,8 @@ export const meta = {
 // Reemplazá `url` con la URL pública de Railway cuando la tengas.
 // =============================================================
 export const qrPage = {
-  // ⚠️ poné acá la URL pública del wrapped (la que da Railway)
-  url: "https://wrappedagus.up.railway.app",
+  // URL pública del wrapped (Railway)
+  url: "https://wrappedagus-production.up.railway.app",
   kicker: "MEDICAL WRAPPED 2026",
   title: "8 años.",
   titleAlt: "Una sola meta.",
